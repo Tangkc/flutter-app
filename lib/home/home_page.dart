@@ -17,7 +17,11 @@ class _HomePageState extends State<HomePage> {
       constraints: new BoxConstraints(),
       child: new Column(
         children: <Widget>[
-          _creatBannerView(),
+          new Stack(
+            children: <Widget>[
+              _creatBannerView(),
+            ],
+          ),
           new Padding(
             padding: const EdgeInsets.only(top: 8.0),
           ),
@@ -176,45 +180,48 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _creatListView() {
-    return new Container(
-      child: ListView.builder(
-        itemCount: dummyData.length,
-        itemBuilder: (context, i) => new Column(
+    List<Widget> list = new List();
+
+    var data = dummyData;
+
+    data.forEach((item) {
+      list.add(new Column(
+        children: <Widget>[
+          new Divider(
+            height: 10.0,
+          ),
+          new ListTile(
+            leading: new CircleAvatar(
+              foregroundColor: Theme.of(context).primaryColor,
+              backgroundColor: Colors.grey,
+              backgroundImage: new NetworkImage(item.avatarUrl),
+            ),
+            title: new Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                new Divider(
-                  height: 10.0,
+                new Text(
+                  item.name,
+                  style: new TextStyle(fontWeight: FontWeight.bold),
                 ),
-                new ListTile(
-                  leading: new CircleAvatar(
-                    foregroundColor: Theme.of(context).primaryColor,
-                    backgroundColor: Colors.grey,
-                    backgroundImage: new NetworkImage(dummyData[i].avatarUrl),
-                  ),
-                  title: new Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      new Text(
-                        dummyData[i].name,
-                        style: new TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      new Text(
-                        dummyData[i].time,
-                        style:
-                            new TextStyle(color: Colors.grey, fontSize: 14.0),
-                      ),
-                    ],
-                  ),
-                  subtitle: new Container(
-                    padding: const EdgeInsets.only(top: 5.0),
-                    child: new Text(
-                      dummyData[i].message,
-                      style: new TextStyle(color: Colors.grey, fontSize: 15.0),
-                    ),
-                  ),
-                )
+                new Text(
+                  item.time,
+                  style: new TextStyle(color: Colors.grey, fontSize: 14.0),
+                ),
               ],
             ),
-      ),
+            subtitle: new Container(
+              padding: const EdgeInsets.only(top: 5.0),
+              child: new Text(
+                item.message,
+                style: new TextStyle(color: Colors.grey, fontSize: 15.0),
+              ),
+            ),
+          )
+        ],
+      ));
+    });
+    return   new Column(
+      children: list,
     );
   }
 }
