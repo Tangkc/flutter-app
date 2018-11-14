@@ -1,6 +1,6 @@
 import 'package:banner/banner.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_huobang/model/chat_model.dart';
+import 'package:flutter_huobang/model/homedata_model.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -32,8 +32,17 @@ class _HomePageState extends State<HomePage> {
           _creatDevider(),
           _creatTipView(),
           _creatDevider(),
-          _creatTip2View(),
-          _creatListView()
+          _creatTip2View("安装服务", Colors.redAccent),
+          _creatListView(azfw),
+          _creatTip2View("宠物服务", Colors.orange),
+          _creatListView(cwfw),
+          _creatTip2View("婚庆服务", Colors.blue),
+          _creatListView(hqfw),
+          _creatTip2View("家庭服务", Colors.redAccent),
+          _creatListView(jtfw),
+          _creatTip2View("教育服务", Colors.orange),
+          _creatListView(jyfw),
+          _creatTip2View("我是有底线的", Colors.black),
         ],
       ),
     ))));
@@ -157,9 +166,9 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _creatTip2View() {
+  Widget _creatTip2View(String title, Color color) {
     return new Container(
-      height: 32.0,
+      height: 38.0,
       color: Colors.white,
       alignment: Alignment.center,
       child: new Row(
@@ -168,59 +177,68 @@ class _HomePageState extends State<HomePage> {
         children: <Widget>[
           new Text(
             "—",
-            style: new TextStyle(color: Colors.redAccent),
+            style: new TextStyle(color: color),
           ),
           new Padding(padding: new EdgeInsets.only(right: 10.0)),
-          new Text("安装服务", style: new TextStyle(color: Colors.redAccent)),
+          new Text(title, style: new TextStyle(color: color)),
           new Padding(padding: new EdgeInsets.only(right: 10.0)),
-          new Text("—", style: new TextStyle(color: Colors.redAccent)),
+          new Text("—", style: new TextStyle(color: color)),
         ],
       ),
     );
   }
 
-  Widget _creatListView() {
+  Widget _creatListView(List<HomeDataModel> datas) {
     List<Widget> list = new List();
-
-    var data = dummyData;
-
+    var data = datas;
     data.forEach((item) {
-      list.add(new Column(
-        children: <Widget>[
-          new Divider(
-            height: 10.0,
-          ),
-          new ListTile(
-            leading: new CircleAvatar(
-              foregroundColor: Theme.of(context).primaryColor,
-              backgroundColor: Colors.grey,
-              backgroundImage: new NetworkImage(item.avatarUrl),
-            ),
-            title: new Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                new Text(
-                  item.name,
-                  style: new TextStyle(fontWeight: FontWeight.bold),
-                ),
-                new Text(
-                  item.time,
-                  style: new TextStyle(color: Colors.grey, fontSize: 14.0),
-                ),
-              ],
-            ),
-            subtitle: new Container(
-              padding: const EdgeInsets.only(top: 5.0),
-              child: new Text(
-                item.message,
-                style: new TextStyle(color: Colors.grey, fontSize: 15.0),
+      list.add(new Container(
+          height: 80.0,
+          child: new Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              new Divider(
+                height: 1.0,
               ),
-            ),
-          )
-        ],
-      ));
+              new Container(
+                height: 70.0,
+                child: new Row(
+                  children: <Widget>[
+                    new Container(
+                    child:  new Image.network(item.image,
+                          height: 70.0, width: 120.0, fit: BoxFit.fill),
+                      padding: new EdgeInsets.only(bottom: 8.0,left: 8.0),
+                    ),
+                   
+                    new Padding(padding: new EdgeInsets.only(left: 8.0)),
+                    new Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        new Text(
+                          item.title,
+                          style: new TextStyle(color:Colors.black,fontSize: 12.0),
+                        ),
+                        new Text(
+                          "\$" + item.price.toString(),
+                          style:
+                              new TextStyle(color: Colors.red, fontSize: 12.0),
+                        ),
+                        new Text(
+                          item.address,
+                          style: new TextStyle(color:Colors.grey,fontSize: 12.0),
+                        ),
+                        new Padding(padding: new EdgeInsets.only(bottom: 6.0),)
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ],
+          )));
     });
-    return   new Column(
+    return new Column(
       children: list,
     );
   }
