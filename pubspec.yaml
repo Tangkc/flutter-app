@@ -37,6 +37,27 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
+  assets:
+    - images/edit_name.png
+    - images/wd_1.png
+    - images/wd_2.png
+    - images/wd_3.png
+    - images/wd_4.png
+    - images/wd_5.png
+    - images/wd_6.png
+    - images/wd_7.png
+    - images/wd_8.png
+    - images/wdgz.png
+    - images/sz.png
+    - images/yqhy.png
+    - images/yjfk.png
+    - images/zxkf.png
+    - images/tc.png
+    - images/fd.png
+    - images/gd.png
+    - images/jylc.png
+
+
   # To add assets to your application, add an assets section, like this:
   # assets:
   #  - images/a_dot_burr.jpeg

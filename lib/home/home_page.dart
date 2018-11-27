@@ -193,7 +193,7 @@ class _HomePageState extends State<HomePage> {
     var data = datas;
     data.forEach((item) {
       list.add(new Container(
-          height: 80.0,
+          height: 100.0,
           child: new Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -202,13 +202,13 @@ class _HomePageState extends State<HomePage> {
                 height: 1.0,
               ),
               new Container(
-                height: 70.0,
+                height: 80.0,
                 child: new Row(
                   children: <Widget>[
                     new Container(
                     child:  new Image.network(item.image,
-                          height: 70.0, width: 120.0, fit: BoxFit.fill),
-                      padding: new EdgeInsets.only(bottom: 8.0,left: 8.0),
+                          height: 80.0, width: 120.0, fit: BoxFit.fill),
+                      padding: new EdgeInsets.only(bottom: 10.0,left: 8.0),
                     ),
                    
                     new Padding(padding: new EdgeInsets.only(left: 8.0)),
